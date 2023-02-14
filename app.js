@@ -77,6 +77,7 @@ cloudinary.config({
 //DATABASE connection
 // 'mongodb://127.0.0.1:27017/yelp-camp'
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
+mongoose.set("strictQuery", false)
 mongoose.connect(dbUrl)
     .then(() => {
         console.log(`connection Open: ${dbUrl}`)
@@ -98,7 +99,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(bodyParser.urlencoded({ extended: true }))
 //middleware for overriding methods
 app.use(methodOverride('_method'))
-mongoose.set('strictQuery', false)
+
 
 
 const sessionConfig = {
@@ -194,19 +195,6 @@ const isAuthor = async (req, res, next) => {
     }
     next()
 }
-//By default, MongoDB creates an _id property on every document that's of type ObjectId.so you cannot use the "=="when you want to compare  the values of the two objectId, that is why we use .equals()
-//Converting the objectId to string will do the work to compare both objectId's
-// const isAuthorize = async (req, res, next) => {
-//     const { id } = req.params
-//     const findC = await Campground.findById(id)
-//     if (findC.author.toString() !== req.user._id.toString()) {
-//         req.flash('error', 'Sorry you are not authorize to edit this')
-//         res.redirect(`/ campgrounds / ${findC._id} `)
-//     }
-//     else {
-//         next()
-//     }
-// }
 
 
 
@@ -379,7 +367,7 @@ app.use((err, req, res, next) => {
 //this is use to confirm that our server is up and running
 const port = process.env.port || 3000
 app.listen(port, () => {
-    console.log('listening to 3000!')
+    console.log(`listening to ${port}`)
 })
 
 

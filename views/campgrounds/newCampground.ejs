@@ -1,0 +1,50 @@
+<% layout('./layout/boilerplate')%>
+    <div class="container justify-content-center align-items-center mt-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+                <div class="card shadow" style="width: 30rem;">
+                    <h1 class="text-center">New campground</h1>
+                    <div class="col-6 offset-3">
+                        <form action="/campgrounds" method="post" class="form-validate" enctype="multipart/form-data"
+                            novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="title">Title: *:</label>
+                                <input class="form-control" type="text" id="title" name="title" placeholder="Title"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="title">Location: *</label>
+                                <input class="form-control" type="text" id="location" name="location"
+                                    placeholder="Location" required>
+                            </div>
+                            <label class="form-label" for="price">Price: *</label>
+                            <div class="mb-3 input-group">
+                                <div class="input-group-text">$</div>
+                                <input class="form-control" type="number" id="price" name="price" placeholder="$0.00"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="description">Description: *</label>
+                                <textarea class="form-control" type="text" id="description" name="description"
+                                    placeholder="description" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Image upload: *</label>
+                                <input class="form-control" type="file" id="image" name="image" multiple required>
+                                <!-- <div class="mb-3">
+                    <label class="form-label" for="images">Image url:</label>
+                    <input class="form-control" type="text" id="images" name="images" placeholder="image"
+                        value="https://source.unsplash.com/collection/483251~">
+                </div> -->
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn btn-success">Add Campground</button>
+                            </div>
+
+                        </form>
+                        <a href="/campgrounds">All Campgrounds</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,23 @@
+<% layout('./layout/boilerplate')%>
+    <div class="row">
+        <div class="column-6 offset-3">
+            <div class="card alert alert-danger" style="width: 18rem; border: 1px solid red; ">
+                <img src="https://cdn.theatlantic.com/thumbor/r4Sw3057WpGBScusiE34v-2uh3A=/302x50:4317x2308/976x549/media/img/mt/2014/08/shutterstock_187027727-1/original.jpg"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">
+                        Oh boy error!!
+                    <h1>
+                        <%=err.status%>
+                    </h1>
+                    <h2>
+                        <%=err.message%>
+                    </h2>
+                    <%if (process.env.NODE_ENV !=="production" ) {%>
+                        <%=err.stack%>
+                            <%}%>
+                                </p>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,55 @@
+<% layout('./layout/boilerplate')%>
+    <div class="row">
+        <div class="card col-6 mt-5">
+
+
+            <form action="/campgrounds/<%=searchResult._id%>?_method=patch" method="post" class="form-validate"
+                enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title:</label>
+                    <input class="form-control" type="text" id="title" name="title" value="<%=searchResult.title%>"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location:</label>
+                    <input class="form-control" type="text" id="location" name="location"
+                        value="<%=searchResult.location%>" required>
+                </div>
+                <label class="form-label" for="price">Price:</label>
+                <div class="mb-3 input-group">
+                    <div class="input-group-text">$</div>
+                    <input class="form-control" type="text" id="price" name="price" value="<%=searchResult.price%>"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Add more image</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description:</label>
+                    <textarea class="form-control" id="description" name="description"
+                        value="<%=searchResult.description%>"><%=searchResult.description%></textarea>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+        </div>
+        <div class=" col-6 mt-5">
+            <p class="fs-6 fw-bold">Check the corresponding image/s you want to delete before hitting the "submit"
+                button
+            </p>
+            <%searchResult.images.forEach((img,i)=>{%>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><img src="<%=img.url%>" alt="" height="200px" width="300px">
+                        <input class="form-check-input mt-0" type="checkbox" name="deleteImages[]"
+                            value="<%=img.filename%>" id="<%=i%>" aria-label="Checkbox for following text input">
+                    </li>
+                    <% }) %>
+        </div>
+
+
+
+
+        </form>
+    </div>
+    </div>

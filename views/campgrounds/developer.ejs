@@ -1,0 +1,89 @@
+<head>
+    <link rel="stylesheet" href="/css/aboutMe.css">
+</head>
+
+<% layout('./layout/boilerplate')%>
+
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="d-flex justify-content-center mt-4">
+            <h1 class="d-flex justify-content-center mt-4"></h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class=" col-6 mt-5">
+
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="/PDphoto.JPG" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Jed P. Atchada</h5>
+                            <p class="card-text">Hi! I'm Jed, I
+                                <span id="greeting">Plan</span> User-friendly Web applications
+                                <br> I
+                                love coding
+                                and learning new things everyday. I was inspired to create this website because I love
+                                exploring and finding a place where I can have a peace of mind.
+                            </p>
+                            <a href="https://www.linkedin.com/in/jed-atchada-9b1203197/">
+                                <img src="	https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" srcset=""
+                                    height="20px" width="20px">
+                            </a>
+                            <a href="https://github.com/Jed1396">
+                                <img src="https://raw.githubusercontent.com/rdimascio/icons/master/icons/github.svg"
+                                    alt="" srcset="" height="20px" width="20px">
+                            </a>
+                            <a href="https://www.instagram.com/jedatchada/">
+                                <img src="https://raw.githubusercontent.com/rdimascio/icons/932c4cf6c9e2031abeca1c164baa0f76785c16fe/icons/instagram.svg"
+                                    alt="" srcset="" height="20px" width="20px">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-6 mt-5">
+
+            <h5>Leave a suggestion or contact me through this form:</h5>
+            <form action="/about" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name:</label>
+                    <input class="form-control" type="text" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email:</label>
+                    <input class="form-control" type="text" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="comment">Comment</label>
+                    <textarea class="form-control" name="comment" id="comment" name="comment" cols="30" rows="3"
+                        required></textarea>
+                </div>
+                <button class="btn btn-success">submit</button>
+            </form>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        let text = ["Plan", "Design", "Develop"];
+        let counter = 0;
+        let elem = document.getElementById("greeting");
+        setInterval(change, 2000);
+        function change() {
+            elem.innerHTML = text[counter];
+            counter++;
+            if (counter >= text.length) { counter = 0; }
+        }
+
+
+    </script>

@@ -1,0 +1,57 @@
+const express = require('express')
+//the name of the variable you will use could be anything. you can even use example. const router = express.Router()
+const products = express.Router()
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
+
+//Use to resolve depracation warning and save it into a variable including the secret code to sign a session
+const sessionOptions = { secret: 'secretCodeForSignedCookie', resave: false, saveUninitialized: false }
+//middleware for session. 'secret' will be used to sign session cookie check documentation for more details
+products.use(session(sessionOptions))
+
+//middleware that will parse the Cookie in to a readable format and also the Parameter that you will pass in, it will be the secret code
+products.use(cookieParser('secretCodeForSignedCookie'))
+
+
+
+
+
+//ROUTES FOR SESSION Sample counter
+products.get('/sessionCount', (req, res) => {
+    if (req.session.count) {
+        req.session.count += 1
+    }
+    else {
+        req.session.count = 1
+    }
+    res.send(`You have viewed this page ${req.session.count}`)
+})
+
+
+
+//Hit this route to have a sample cookie, signed and unsigned
+products.get('/', (req, res) => {
+    res.cookie('name', 'Sample Cookie1', { signed: true })
+    res.cookie('fruit', 'apple')
+    // console.log(req.cookies)
+    res.send('GET Products')
+})
+
+products.post('/', (req, res) => {
+    res.send('Post Products')
+})
+
+
+//You have to hit this route to show you the result of signed and un-signed cookies|| if you encounter undefined just delete the cookies and restart the server
+products.get('/:id', (req, res) => {
+    console.log(req.cookies)
+    res.send(req.signedCookies)
+})
+products.get('/:id/edit', (req, res) => {
+    res.send('EDIT ID   Products')
+})
+
+
+
+module.exports = products

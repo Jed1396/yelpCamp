@@ -1,0 +1,50 @@
+<head>
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+
+
+<nav class="navbar sticky-top navbar-expand-lg bg-dark ">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="/home">Yelpcamp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mx-5" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active text-white" aria-current="page" href="/campgrounds">Home</a>
+                <a class="nav-link text-white" href="/about">Contact</a>
+
+            </div>
+        </div>
+        <%if(!currentUser){%>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link text-white" href="/login">Login</a>
+                <a class="nav-link text-white" href="/register">Register</a>
+            </div>
+            <%}%>
+                <%if(currentUser){%>
+                    <div class="dropdown pe-5">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <%=`Welcome, ${currentUser.username.toUpperCase()}!`%>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="/campgrounds">Account Details</a></li>
+                            <li><a class="dropdown-item" href="/campgroundsOwned">View your Campgrounds</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-black">
+                                    <form action="/logout" method="post">
+                                        <button>Sign Out?</button>
+                                    </form>
+                                </a>
+                            </li>
+                            <%}%>
+                        </ul>
+                    </div>
+    </div>
+</nav>

@@ -79,7 +79,7 @@ cloudinary.config({
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
 mongoose.connect(dbUrl)
     .then(() => {
-        console.log("connection Open")
+        console.log(`connection Open: ${dbUrl}`)
     })
     .catch((e) => {
         console.log("oh no error")
@@ -100,23 +100,26 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 
+const sessionConfig = {
+    store: MongoStore.create({
+        mongoUrl: dbUrl,
+        touchAfter: 24 * 3600 // time period in seconds
+    }),
+    name: 'session',
+    secret: "thisissecret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        //secure:true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
 //middleware for session
 const secret = process.env.SECRET || 'thisisasecret'
-app.use(session({
-    store: MongoStore.create
-        ({
-            mongoUrl: dbUrl,
-            touchAfter: 24 * 60 * 60 // time period in seconds, 24hrs*60mins in an hour * 60seconds         Date.now() + 1000ms *60secInMin *60minsInHrs*24HrsInAday *7DaysinAWeek
-        }),
-    name: 'camp',
-    secret: secret,
-    resave: false,
-    saveUninitialized: false,
-    cookie:
-    {
-        secure: true
-    }
-}))
+app.use(session(sessionConfig))
 app.use(express.static(path.join(__dirname, 'public')))
 //Npm package that will flash a message one time, usually for logging in,deleting something, etc...
 app.use(flash());

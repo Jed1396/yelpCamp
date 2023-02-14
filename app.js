@@ -98,6 +98,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(bodyParser.urlencoded({ extended: true }))
 //middleware for overriding methods
 app.use(methodOverride('_method'))
+mongoose.set('strictQuery', false)
 
 
 const sessionConfig = {
@@ -210,7 +211,7 @@ const isAuthor = async (req, res, next) => {
 
 
 
-app.get('/home', (req, res,) => {
+app.get('/', (req, res,) => {
     res.render('campgrounds/home.ejs')
 })
 

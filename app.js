@@ -285,7 +285,7 @@ app.get('/campgrounds/:id/edit', requireLogin, isAuthor, wrapAsync(async (req, r
 
 app.patch('/campgrounds/:id', isAuthor, upload.array('image', 10), validateCampground, wrapAsync(async (req, res, next) => {
     const { title, location, price, description } = req.body
-    const update = await Campground.findOneAndUpdate(req.params.id, { title: title, location: location, price: price, description: description })
+    const update = await Campground.findByIdAndUpdate(req.params.id, { title: title, location: location, price: price, description: description })
     const data = req.files.map(f => {
         return {
             url: f.path,
@@ -294,13 +294,14 @@ app.patch('/campgrounds/:id', isAuthor, upload.array('image', 10), validateCampg
     })
     const findID = await Campground.findById(req.params.id)
     await findID.images.push(...data)//instead of passing the entire array, since req.files is giving an array but we just wanna get the data we use ...spread
-    await findID.save()
+
     if (req.body.deleteImages) {
         for (let filename of req.body.deleteImages) {
             cloudinary.uploader.destroy(filename)
         }
         await update.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } }) //this query will delete image from the mongo 
     }
+    await findID.save()
     req.flash('success', 'Sucessfully edited a Campground')
     res.redirect(`/campgrounds/${update._id}`)
 

@@ -365,7 +365,7 @@ app.use((err, req, res, next) => {
 
 
 //this is use to confirm that our server is up and running
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`listening to ${port}`)
 })

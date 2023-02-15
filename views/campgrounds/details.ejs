@@ -60,7 +60,9 @@
 
         <div class="col-6">
             <div class="mt-3 mb-3">
-                <div id='map' style='width: 400px; height: 300px;'></div>
+                <div class="container">
+                    <div id='map' style='width: 400px; height: 300px;'></div>
+                </div>
                 <script>
                     const campground = JSON.parse('<%-JSON.stringify(searchID)%>');
                     mapboxgl.accessToken = '<%-process.env.MAPBOX_TOKEN %>';

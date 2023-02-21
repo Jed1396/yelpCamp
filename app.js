@@ -337,7 +337,9 @@ app.post('/about', async (req, res, next) => {
     res.redirect('/campgrounds')
 })
 
+const deleteSession = ()=>{
 
+}
 
 // //error handling for routes that are not valid
 app.all('*', (req, res, next) => {

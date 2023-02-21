@@ -40,7 +40,7 @@
             </p>
             <%searchResult.images.forEach((img,i)=>{%>
                 <ul class="list-group mb-3 col-sm-4 col-xs-4 border-0">
-                    <li class="list-group-item border-0"><img src="<%=img.url%>" alt="" height="200px" width="200px">
+                    <li class="list-group-item border-0"><img src="<%=img.url%>" alt="" height="200px" width="75%">
                         <input class="form-check-input mt-0" type="checkbox" name="deleteImages[]"
                             value="<%=img.filename%>" id="<%=i%>" aria-label="Checkbox for following text input">
                     </li>
